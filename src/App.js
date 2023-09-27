@@ -5,8 +5,12 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import './App.css'
 import { Navbar,Footer,Sidebar,ThemeSettings} from './components'
 import { Orders,Calendar,Employees,Stacked,Pyramid,Customers,Kanban,Area,Bar,Pie,Financial,ColorPicker,ColorMapping,Editor, Ecommerce, Line } from './pages';  
+import { UseStateContext } from './contexts/ContextProvider';
+
 const app = () => {
-  const activeMenu = true;
+  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = UseStateContext();
+
+
   return (
     <div>
       <BrowserRouter>
