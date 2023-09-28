@@ -12,3 +12,4 @@ export { default as Stacked } from './Charts/Stacked';
 export { default as Pie } from './Charts/Pie';
 export { default as ChartHeader } from './ChartHeader';
 export { default as Header } from './Header';
+export {default as Chat} from './Chat';
