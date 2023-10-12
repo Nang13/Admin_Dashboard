@@ -40,7 +40,7 @@ module.exports = {
         },
         backgroundImage: {
           'hero-pattern':
-            "url('https://i.ibb.co/QvrRKXM/Bing-Wallpaper-26.jpg')",
+            "url('https://firebasestorage.googleapis.com/v0/b/prn221-save-image.appspot.com/o/theme%2F386339766_122109003410052962_2749445005221285184_n.jpg?alt=media&token=e1d6b4a1-fbc7-4a8a-b585-59183d8a6872')",
         },
       },
     },

@@ -3,12 +3,13 @@ import { Browser, Routes, Route, BrowserRouter } from 'react-router-dom'
 import { FiSettings } from 'react-icons/fi'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import './App.css'
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components'
+import { Navbar, Footer, Sidebar, ThemeSettings ,Login} from './components'
 import { Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor, Ecommerce, Line } from './pages';
 import { UseStateContext } from './contexts/ContextProvider';
 
 const app = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = UseStateContext();
+
 
 
   return (
@@ -36,7 +37,7 @@ const app = () => {
             <div>
               <Routes>
                 {/* Dashboard*/}
-                <Route path='/' element={(<Ecommerce />)} />
+                <Route path='/' element={(<Login />)} />
                 <Route path='/ecommerce' element={(<Ecommerce />)} />
                 {/*Pages */}
                 <Route path='/orders' element={(<Orders />)} />

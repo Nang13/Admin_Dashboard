@@ -5,11 +5,11 @@ import App from './App'
 import Login from './components/Login'
 import { ContextProvider } from './contexts/ContextProvider'
 
-// ReactDOM.render(
-//     <ContextProvider>
-//         <Login />
-//     </ContextProvider>
-//     , document.getElementById('root'))
 ReactDOM.render(
-    <Login />, document.getElementById('root')
-)
+    <ContextProvider>
+        <App />
+    </ContextProvider>
+    , document.getElementById('root'))
+// ReactDOM.render(
+//     <Login />, document.getElementById('root')
+// )

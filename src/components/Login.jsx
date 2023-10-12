@@ -1,16 +1,38 @@
 import React, { useState } from "react";
+import axios from "../apis/axios";
 import { useNavigate } from "react-router-dom";
-import Cart  from "./Cart";
+import Cart from "./Cart";
 export const Login = (props) => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [Phone, setPhone] = useState('');
+    const [Password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
-        console.log(email);
-        navigate("./Cart");
+        console.log(Phone);
+        console.log(Password)
+        try {
+            const response = await axios.post('/user/login', { Phone, Password }, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            localStorage.setItem("jwt",response.data.accessToken)
+            console.log(response?.data);
+            navigate("/ecommerce")
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+        }
+
     }
 
     return (
@@ -25,11 +47,11 @@ export const Login = (props) => {
                         <div>
                             <label htmlFor="email" className="sr-only">Email</label>
                             <input
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={Phone}
+                                onChange={(e) => setPhone(e.target.value)}
                                 id="email"
                                 name="email"
-                                type="email"
+                                type="text"
                                 autoComplete="email"
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border 
@@ -41,8 +63,8 @@ export const Login = (props) => {
                         <div>
                             <label htmlFor="password" className="sr-only">Password</label>
                             <input
-                                value={pass}
-                                onChange={(e) => setPass(e.target.value)}
+                                value={Password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 id="password"
                                 name="password"
                                 type="password"

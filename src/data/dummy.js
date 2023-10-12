@@ -22,7 +22,9 @@ import product5 from './product5.jpg';
 import product6 from './product6.jpg';
 import product7 from './product7.jpg';
 import product8 from './product8.jpg';
-
+import { AxisModel, ChartComponent, SeriesCollectionDirective, AxesDirective, AxisDirective, SeriesDirective, Inject,
+  ColumnSeries, Legend, DateTime, Tooltip, DataLabel, Zoom, Crosshair, LineSeries, Selection}
+  from'@syncfusion/ej2-react-charts';
 export const gridOrderImage = (props) => (
   <div>
     <img
@@ -32,6 +34,8 @@ export const gridOrderImage = (props) => (
     />
   </div>
 );
+
+
 
 export const gridOrderStatus = (props) => (
   <button
@@ -373,15 +377,15 @@ export const FinancialPrimaryYAxis = {
 
 export const LinePrimaryXAxis = {
   valueType: 'DateTime',
-  labelFormat: 'y',
-  intervalType: 'Years',
+  labelFormat: 'yMMM',
+  intervalType: 'Months',
   edgeLabelPlacement: 'Shift',
   majorGridLines: { width: 0 },
   background: 'white',
 };
 
 export const LinePrimaryYAxis = {
-  labelFormat: '{value}%',
+  labelFormat: '{value}',
   rangePadding: 'None',
   minimum: 0,
   maximum: 100,
@@ -391,47 +395,86 @@ export const LinePrimaryYAxis = {
   minorTickLines: { width: 0 },
 };
 
+// export const customersGrid = [
+//   { type: 'checkbox', width: '50' },
+//   { headerText: 'Name',
+//     width: '150',
+//     template: customerGridImage,
+//     textAlign: 'Center' },
+//   { field: 'ProjectName',
+//     headerText: 'Project Name',
+//     width: '150',
+//     textAlign: 'Center' },
+//   { field: 'Status',
+//     headerText: 'Status',
+//     width: '130',
+//     format: 'yMd',
+//     textAlign: 'Center',
+//     template: customerGridStatus },
+//   {
+//     field: 'Weeks',
+//     headerText: 'Weeks',
+//     width: '100',
+//     format: 'C2',
+//     textAlign: 'Center' },
+//   { field: 'Budget',
+//     headerText: 'Budget',
+//     width: '100',
+//     format: 'yMd',
+//     textAlign: 'Center' },
+
+//   { field: 'Location',
+//     headerText: 'Location',
+//     width: '150',
+//     textAlign: 'Center' },
+
+//   { field: 'CustomerID',
+//     headerText: 'Customer ID',
+//     width: '120',
+//     textAlign: 'Center',
+//     isPrimaryKey: true,
+//   },
+
+// ];
+
+
 export const customersGrid = [
   { type: 'checkbox', width: '50' },
-  { headerText: 'Name',
+  { headerText: 'name',
     width: '150',
     template: customerGridImage,
     textAlign: 'Center' },
-  { field: 'ProjectName',
-    headerText: 'Project Name',
+  { field: 'name',
+    headerText: 'Customer Name',
     width: '150',
     textAlign: 'Center' },
-  { field: 'Status',
-    headerText: 'Status',
-    width: '130',
-    format: 'yMd',
-    textAlign: 'Center',
-    template: customerGridStatus },
   {
-    field: 'Weeks',
-    headerText: 'Weeks',
+    field: 'phone',
+    headerText: 'Phone',
     width: '100',
     format: 'C2',
     textAlign: 'Center' },
-  { field: 'Budget',
-    headerText: 'Budget',
+  { field: 'address',
+    headerText: 'Address',
     width: '100',
     format: 'yMd',
     textAlign: 'Center' },
 
-  { field: 'Location',
-    headerText: 'Location',
-    width: '150',
-    textAlign: 'Center' },
+  // { field: 'Location',
+  //   headerText: 'Location',
+  //   width: '150',
+  //   textAlign: 'Center' },
 
-  { field: 'CustomerID',
-    headerText: 'Customer ID',
-    width: '120',
-    textAlign: 'Center',
-    isPrimaryKey: true,
-  },
+  // { field: 'CustomerID',
+  //   headerText: 'Customer ID',
+  //   width: '120',
+  //   textAlign: 'Center',
+  //   isPrimaryKey: true,
+  // },
 
 ];
+
+
 
 export const employeesGrid = [
   { headerText: 'Employee',
@@ -3041,33 +3084,51 @@ export const scheduleData = [
 
 export const lineChartData = [
   [
-    { x: new Date(2005, 0, 1), y: 21 },
-    { x: new Date(2006, 0, 1), y: 24 },
-    { x: new Date(2007, 0, 1), y: 36 },
-    { x: new Date(2008, 0, 1), y: 38 },
-    { x: new Date(2009, 0, 1), y: 54 },
-    { x: new Date(2010, 0, 1), y: 57 },
-    { x: new Date(2011, 0, 1), y: 70 },
+    { x: new Date(2023, 8, 1), y: 21 },
+    { x: new Date(2023, 9, 1), y: 24 },
+    { x: new Date(2023, 10, 1), y: 36 },
+    { x: new Date(2023, 11, 1), y: 38 },
+    { x: new Date(2023, 12, 1), y: 54 },
+    { x: new Date(2024, 1, 1), y: 57 },
+    { x: new Date(2024, 1, 1), y: 70 },
   ],
   [
-    { x: new Date(2005, 0, 1), y: 28 },
-    { x: new Date(2006, 0, 1), y: 44 },
-    { x: new Date(2007, 0, 1), y: 48 },
-    { x: new Date(2008, 0, 1), y: 50 },
-    { x: new Date(2009, 0, 1), y: 66 },
-    { x: new Date(2010, 0, 1), y: 78 },
-    { x: new Date(2011, 0, 1), y: 84 },
+    { x: new Date(2023, 8, 1), y: 28 },
+    { x: new Date(2023, 9, 1), y: 44 },
+    { x: new Date(2023, 10, 1), y: 48 },
+    { x: new Date(2023, 11, 1), y: 50 },
+    { x: new Date(2023, 12, 1), y: 66 },
+    { x: new Date(2024, 1, 1), y: 78 },
+    { x: new Date(2024, 1, 1), y: 84 },
   ],
+  [
+    { x: new Date(2023, 8, 1), y: 21 },
+    { x: new Date(2023, 9, 1), y: 24 },
+    { x: new Date(2023, 10, 1), y: 36 },
+    { x: new Date(2023, 11, 1), y: 38 },
+    { x: new Date(2023, 12, 1), y: 54 },
+    { x: new Date(2024, 1, 1), y: 57 },
+    { x: new Date(2024, 1, 1), y: 70 },
+  ],
+  // [
+  //   { x: new Date(2005, 0, 1), y: 28 },
+  //   { x: new Date(2006, 0, 1), y: 44 },
+  //   { x: new Date(2007, 0, 1), y: 48 },
+  //   { x: new Date(2008, 0, 1), y: 50 },
+  //   { x: new Date(2009, 0, 1), y: 66 },
+  //   { x: new Date(2010, 0, 1), y: 78 },
+  //   { x: new Date(2011, 0, 1), y: 84 },
+  // ],
 
-  [
-    { x: new Date(2005, 0, 1), y: 10 },
-    { x: new Date(2006, 0, 1), y: 20 },
-    { x: new Date(2007, 0, 1), y: 30 },
-    { x: new Date(2008, 0, 1), y: 39 },
-    { x: new Date(2009, 0, 1), y: 50 },
-    { x: new Date(2010, 0, 1), y: 70 },
-    { x: new Date(2011, 0, 1), y: 100 },
-  ],
+  // [
+  //   { x: new Date(2005, 0, 1), y: 10 },
+  //   { x: new Date(2006, 0, 1), y: 20 },
+  //   { x: new Date(2007, 0, 1), y: 30 },
+  //   { x: new Date(2008, 0, 1), y: 39 },
+  //   { x: new Date(2009, 0, 1), y: 50 },
+  //   { x: new Date(2010, 0, 1), y: 70 },
+  //   { x: new Date(2011, 0, 1), y: 100 },
+  // ],
 ];
 export const dropdownData = [
   {
@@ -3095,7 +3156,7 @@ export const lineCustomSeries = [
   { dataSource: lineChartData[0],
     xName: 'x',
     yName: 'y',
-    name: 'Germany',
+    name: 'Product',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
     type: 'Line' },
@@ -3103,7 +3164,7 @@ export const lineCustomSeries = [
   { dataSource: lineChartData[1],
     xName: 'x',
     yName: 'y',
-    name: 'England',
+    name: 'Order',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
     type: 'Line' },
@@ -3111,7 +3172,7 @@ export const lineCustomSeries = [
   { dataSource: lineChartData[2],
     xName: 'x',
     yName: 'y',
-    name: 'India',
+    name: 'Customer',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
     type: 'Line' },
