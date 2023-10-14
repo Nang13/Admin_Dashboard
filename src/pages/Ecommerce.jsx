@@ -13,46 +13,36 @@ const Ecommerce = () => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    const getCustomer = async () => {
-      const jwt = localStorage.getItem("jwt")
-      //   const responseProduct = await axios.get("/product");
-      const responseProduct = await axios.get('/product', {
-        headers: { 'Content-Type': 'application/json' }
+    const getData=async ()=>{
+          const jwt = localStorage.getItem("jwt")
+            const productPromise =  axios.get('/product', {
+        headers: { 'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`
+      
+      }
       });
-      console.log(responseProduct?.data);
-      setCustomer(responseProduct?.data.items)
-      console.log(customer)
+            const customerPromise =  axios.get('/user', {
+        headers: { 'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`
+      
+      }
 
-    }
-    // const getOrder = async () => {
-    //   const jwt = localStorage.getItem("jwt")
-    //   //   const responseProduct = await axios.get("/product");
-    //   const responseOrder = await axios.get('/order', {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: `Bearer ${jwt}`
-    //     }
-    //   });
-    //   console.log(responseOrder?.data);
-    //   setCustomer(responseProduct?.data.items)
-    //   console.log(customer)
-    // }
-
-    const getProduct = async () => {
-      //  const responseCustomer = await axios.get('/user')
-      const jwt = localStorage.getItem("jwt")
-      const responseProduct = await axios.get('/product', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${jwt}`
-        }
       });
-      console.log(responseProduct?.data)
-      setProduct(responseProduct?.data.items)
+            const orderPromise =  axios.get('/order', {
+        headers: { 'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`
+      
+      }
+
+
+      });
+      const [product,customer,order]=await Promise.all([productPromise,customerPromise,orderPromise])
+
+      setProduct(product.data.items)
+      setCustomer(customer.data.results)
+      setOrder(order.data.orderResponses)
     }
-    getCustomer();
-    getProduct();
-    // getOrder();
+    getData()
   }, [])
 
 
@@ -64,7 +54,7 @@ const Ecommerce = () => {
           <div className='flex justify-between items-center'>
             <div>
               <p className='text-gray-400 font-bold'>Earnings </p>
-              <p className=' text-2xl'>$63,448.78</p>
+              <p className=' text-2xl'>5,000,000 VNĐ</p>
             </div>
           </div>
           {/* <div className='mt-6'>
@@ -84,7 +74,7 @@ const Ecommerce = () => {
             </button>
             <p className='mt-3'>
               <span className='text-lg font-semibold'>
-                {customer.length}
+                {customer?.length}
               </span>
               <span className={`text-sm text-#03C9D7 ml-2`}>
                 18%
@@ -102,7 +92,7 @@ const Ecommerce = () => {
             </button>
             <p className='mt-3'>
               <span className='text-lg font-semibold'>
-                {product.length}
+                {product?.length}
               </span>
               <span className={`text-sm text-green-600 ml-2`}>
                 18%
@@ -120,7 +110,7 @@ const Ecommerce = () => {
             </button>
             <p className='mt-3'>
               <span className='text-lg font-semibold'>
-                {product.length}
+                {order?.length}
               </span>
               <span className={`text-sm text-green-600 ml-2`}>
                 18%
@@ -172,14 +162,14 @@ const Ecommerce = () => {
             <div className='border-r-1 border-color m-4 pr-10'>
               <div>
                 <p>
-                  <span className='text-3xl font-semibold'>$93,438</span>
+                  <span className='text-3xl font-semibold'>1,193,438 VND</span>
                   <span className='p-1.5 hover:drop-shadow-xl cursor-pointer rounded-full text-white bg-green-400 ml-3 text-xs'>23%</span>
                 </p>
                 <p className='text-gray-500 mt-1'>Total</p>
               </div>
               <div>
                 <p>
-                  <span className='text-3xl font-semibold'>$48,438</span>
+                  <span className='text-3xl font-semibold'>1,248,438 VND</span>
                 </p>
                 <p className='text-gray-500 mt-1'>Income</p>
               </div>
